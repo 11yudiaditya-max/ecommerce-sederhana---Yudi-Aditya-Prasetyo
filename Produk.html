@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tokoku</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="shortcut icon" href="tokoku1.ico" type="image/x-icon" />
+    <style>
+        /* Styling tambahan */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #f8f8f8;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        .action-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            margin-left: 15px;
+            cursor: pointer;
+            position: relative;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: red;
+            color: white;
+            font-size: 12px;
+            border-radius: 50%;
+            padding: 2px 6px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        /* Atur ukuran gambar produk agar seragam */
+        .product-img {
+            width: 150px; /* Ukuran tetap */
+            height: 150px;
+            object-fit: cover; /* Pastikan gambar tidak pecah dan proporsional */
+            display: block;
+            margin: 0 auto; /* Tengah */
+            border-radius: 8px;
+        }
+        .product-title {
+            margin: 10px 0 5px;
+            font-size: 16px;
+            text-align: center;
+        }
+        .product-price {
+            color: green;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .add-to-cart {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .wishlist-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        /* Detail keranjang */
+        #keranjang-detail {
+            padding: 20px;
+            display: none;
+            border-top: 2px solid #ccc;
+            margin-top: 20px;
+        }
+        #keranjang-detail h3 {
+            margin-top: 0;
+        }
+        #list-keranjang {
+            list-style: none;
+            padding: 0;
+        }
+        #list-keranjang li {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        #list-keranjang img {
+            width: 80px;
+            height: auto;
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+        #list-keranjang .detail-info {
+            flex: 1;
+        }
+        #list-keranjang .detail-info h4 {
+            margin: 0 0 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">Tokoku<span>.</span></div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Cari produk..." />
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="header-actions">
+                    <button class="action-btn"><i class="fas fa-user"></i></button>
+                    <button class="action-btn" id="keranjangBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Beranda.html">Beranda</a></li>
+                <li><a href="Produk.html">Produk</a></li>
+                <li><a href="kategori.html">Kategori</a></li>
+                <li><a href="#">Promo</a></li>
+                <li><a href="#">Tentang Kami</a></li>
+                <li><a href="#">Kontak</a></li>
+            </ul>
+        </nav>
+    </div>
+</head>
+
+    <div class="container">
+        <h2 class="section-title">Produk Terpopuler</h2>
+        <div class="product-grid" id="productGrid">
+            <!-- Produk 1 -->
+            <div class="product-card" data-name="Kamera DSLR Pro" data-price="Rp 5.999.000" data-img="kamera dslr.jpg" data-desc="Kamera DSLR Pro dengan kualitas gambar tinggi.">
+                <img src="kamera dslr.jpg" alt="Produk 1" class="product-img" />
+                <div class="product-info">
+                    <h3 class="product-title">Kamera DSLR Pro</h3>
+                    <div class="product-price">Rp 5.999.000</div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Tambah</button>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+            <!-- Produk 2 -->
+            <div class="product-card" data-name="Smartphone" data-price="Rp 3.499.000" data-img="smartphone.jpg" data-desc="Smartphone terbaru dengan fitur lengkap.">
+                <img src="smartphone.jpg" alt="Produk 2" class="product-img" />
+                <div class="product-info">
+                    <h3 class="product-title">Smartphone</h3>
+                    <div class="product-price">Rp 3.499.000</div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Tambah</button>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+            <!-- Produk 3 -->
+            <div class="product-card" data-name="Laptop Gaming" data-price="Rp 8.750.000" data-img="laptop gaming.jpg" data-desc="Laptop gaming dengan performa tinggi.">
+                <img src="laptop gaming.jpg" alt="Produk 3" class="product-img" />
+                <div class="product-info">
+                    <h3 class="product-title">Laptop Gaming</h3>
+                    <div class="product-price">Rp 8.750.000</div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Tambah</button>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                    </div>
+                </div> 
+            </div>
+            <!-- Produk 4 -->
+            <div class="product-card" data-name="Headphone Wireless" data-price="Rp 1.250.000" data-img="Headphone Wireless.jpg" data-desc="Headphone wireless dengan suara jernih.">
+                <img src="Headphone Wireless.jpg" alt="Produk 4" class="product-img" />
+                <div class="product-info">
+                    <h3 class="product-title">Headphone Wireless</h3>
+                    <div class="product-price">Rp 1.250.000</div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Tambah</button>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bagian detail keranjang -->
+        <div id="keranjang-detail">
+            <h3>Keranjang Belanja</h3>
+            <ul id="list-keranjang"></ul>
+        </div>
+    </div>
+
+    <script>
+        // Variabel keranjang
+        let keranjang = [];
+        const cartCountEl = document.getElementById('cartCount');
+        const listKeranjangEl = document.getElementById('list-keranjang');
+        const keranjangDetailEl = document.getElementById('keranjang-detail');
+
+        // Fungsi update jumlah dan tampilkan detail
+        function updateKeranjang() {
+            cartCountEl.textContent = keranjang.length;
+            // Tampilkan detail produk di keranjang
+            listKeranjangEl.innerHTML = '';
+            keranjang.forEach((produk, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <img src="${produk.img}" alt="${produk.name}">
+                    <div class="detail-info">
+                        <h4>${produk.name}</h4>
+                        <p>Harga: ${produk.price}</p>
+                        <p>Deskripsi: ${produk.desc}</p>
+                    </div>
+                `;
+                listKeranjangEl.appendChild(li);
+            });
+        }
+
+        // Event klik tombol tambah produk
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const card = btn.closest('.product-card');
+                const name = card.getAttribute('data-name');
+                const price = card.getAttribute('data-price');
+                const img = card.getAttribute('data-img');
+                const desc = card.getAttribute('data-desc');
+                keranjang.push({ name, price, img, desc });
+                updateKeranjang();
+            });
+        });
+
+        // Event klik ikon keranjang
+        document.getElementById('keranjangBtn').addEventListener('click', () => {
+            if (keranjang.length > 0) {
+                // Toggle tampilan detail keranjang
+                if (document.getElementById('keranjang-detail').style.display === 'none' || document.getElementById('keranjang-detail').style.display === '') {
+                    document.getElementById('keranjang-detail').style.display = 'block';
+                } else {
+                    document.getElementById('keranjang-detail').style.display = 'none';
+                }
+            } else {
+                alert('Keranjang kosong');
+            }
+        });
+
+        // Inisialisasi
+        updateKeranjang();
+    </script>
+</body>
+</html>
